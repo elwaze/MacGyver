@@ -11,6 +11,9 @@ size_in_sprites = 15
 sprite_size = 30
 window_size = size_in_sprites * sprite_size
 
+# Maze file
+
+maze = "maze.txt"
 
 # list of images
 image_wall = "images/wall.png"

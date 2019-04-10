@@ -43,7 +43,7 @@ class Maze:
     @classmethod
     def display(cls, window):
         """Method used to display  the maze from the list we generated with the method initialize_maze."""
-        # images (image of the arrival ist the image of the guard standing on the arrival sprite).
+        # images (image of the arrival is the image of the guard standing on the arrival sprite).
         wall = pygame.image.load(image_wall).convert()
         arrival = pygame.image.load(image_guard).convert_alpha()
 
@@ -65,21 +65,22 @@ class Maze:
 
 
 class Player:
-    """Class used to create Mac Gyver"""
+    """Class used to create MacGyver"""
 
     def __init__(self, portrait):
-        # image du personnage
+        # Player's image.
         self.portrait = pygame.image.load(portrait).convert_alpha()
-        # Position du personnage en cases et en pixels
+        # Player's position (in sprites and in pixels).
         self.sprite_x = 0
         self.sprite_y = 0
         self.x = 0
         self.y = 0
-        # number of objects collected
+        self.position = self.x, self.y
+        # number of objects collected (counter).
         self.obj = 0
 
-    def deplacer(self, direction):
-        """Methode permettant de déplacer le personnage"""
+    def move(self, direction):
+        """Method to move the player"""
 
         # Déplacement vers la droite
         if direction == 'right':
@@ -136,5 +137,4 @@ class Collected:
 
     def picked(self):
         # suppr un obj qd mg passe dessus
-
 

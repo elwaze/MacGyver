@@ -25,27 +25,22 @@ def main():
     pygame.init()
 
     # Window creation
-
     window = pygame.display.set_mode((1050, 1050))
 
     # Background filling
-
-    bckg = pygame.image.load("background.png").convert()
+    bckg = pygame.image.load(image_background).convert()
     window.blit(bckg, (0, 0))
 
     # Guard setting
-
     guard = pygame.image.load("guard.png").convert_alpha()
     window.blit(guard, (200, 300))
 
     # Mac Giver setting
-
     mc_giver = Player(image_mg)
-    mg_position = mc_giver.get_rect()
+    mg_position = mc_giver.position
     window.blit(mc_giver, mg_position)
 
     # Screen refresh
-
     pygame.display.flip()
 
     # Cont setting true
@@ -70,6 +65,8 @@ def main():
                     mg_position = mg_position.move(-70, 0)     # Mg goes left for 3 pixels
 
         # Re-collage
+
+
         window.blit(bckg, (0, 0))
         window.blit(guard, (200, 300))
         window.blit(mc_giver, mg_position)
