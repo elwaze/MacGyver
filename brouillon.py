@@ -12,7 +12,7 @@ files : MacGyver.py, classes.py, cons.py, maze.txt, images
 """
 
 
-# Modules importation
+# Modules importation.
 
 import pygame
 from pygame.locals import *
@@ -20,25 +20,25 @@ from classes import *
 from cons import *
 
 
-# Library initialization
+# Library initialization.
 pygame.init()
 
-# Window creation
+# Window creation.
 window = pygame.display.set_mode((window_size, window_size))
 pygame.display.set_caption("Mac Gyver")
 
 
-# Maze setting
+# Maze setting.
 maze = Maze("maze.txt")
 maze.initialize_maze()
 maze.display(window)
 
-# Mac Giver setting
+# Mac Giver setting.
 mc_giver = Player(image_mg)
 mg_position = mc_giver.position
 mc_giver.show(window)
 
-# objects setting
+# objects setting.
 ether = Collected(image_ether)
 ether.position = ether.init_position(maze)
 ether.show(window)
@@ -49,51 +49,59 @@ plastic_pipe = Collected(image_plastic_pipe)
 plastic_pipe.position = plastic_pipe.init_position(maze)
 plastic_pipe.show(window)
 
-# Screen refresh
+# Screen refresh.
 pygame.display.flip()
 
-# Cont setting true (to continue)
+# Cont setting true (to continue).
 cont = 1
 
-# Keeping the window opened until event QUIT happens (Alt + F4 or close cross)
+# Keeping the window opened until event QUIT happens (Alt + F4 or close cross), or until the maze is finished.
 while cont:
-    pygame.time.Clock().tick(30)
+    pygame.time.Clock().tick(30)    # Saving processor resources.
     for event in pygame.event.get():
-
-        if event.type == QUIT:
+        if event.type == QUIT:  # If event QUIT, we go out of the while loop.
             cont = 0
-        elif event.type == KEYDOWN:  # What happens if user press a key down
-            if event.key == K_DOWN:  # If down cursor key
-                mg_position = mc_giver.move('down', maze)  # Mg goes down for 1 sprite
-            elif event.key == K_UP:  # If up cursor key
-                mg_position = mc_giver.move('up', maze)  # Mg goes up for 1 sprite
-            elif event.key == K_RIGHT:  # If right cursor key
-                mg_position = mc_giver.move('right', maze)  # Mg goes right for 1 sprite
-            elif event.key == K_LEFT:  # If left cursor key
-                mg_position = mc_giver.move('left', maze)  # Mg goes left for 1 sprite
+        elif event.type == KEYDOWN:  # What happens if user press a key down.
+            if event.key == K_DOWN:  # If down cursor key.
+                mg_position = mc_giver.move('down', maze)  # Mg goes down for 1 sprite.
+            elif event.key == K_UP:  # If up cursor key.
+                mg_position = mc_giver.move('up', maze)  # Mg goes up for 1 sprite.
+            elif event.key == K_RIGHT:  # If right cursor key.
+                mg_position = mc_giver.move('right', maze)  # Mg goes right for 1 sprite.
+            elif event.key == K_LEFT:  # If left cursor key.
+                mg_position = mc_giver.move('left', maze)  # Mg goes left for 1 sprite.
 
-        if mg_position == ether.position:
+        if mg_position == ether.position:   # Mac Gyver picked the ether.
             ether.exists = 0
-        elif mg_position == needle.position:
+        elif mg_position == needle.position:    # Mac Gyver picked the needle.
             needle.exists = 0
-        elif mg_position == plastic_pipe.position:
+        elif mg_position == plastic_pipe.position:  # Mac Gyver picked the plastic pipe.
             plastic_pipe.exists = 0
 
+        # Re-pasting after the event loop.
         maze.display(window)
         mc_giver.show(window)
-        if ether.exists != 0:
+        if ether.exists != 0:   # Not picked by Mac Gyver.
             ether.show(window)
-        if needle.exists != 0:
+        if needle.exists != 0:  # Not picked by Mac Gyver.
             needle.show(window)
-        if plastic_pipe.exists != 0:
+        if plastic_pipe.exists != 0:    # Not picked by Mac Gyver.
             plastic_pipe.show(window)
+
+        # Screen refresh.
         pygame.display.flip()
 
+        # When Mac Gyver arrives to the guard position (sprite "a").
         if maze.structure[mc_giver.sprite_y][mc_giver.sprite_x] == "a":
+            # We check if there are still objects to pick in the maze
             if ether.exists or needle.exists or plastic_pipe.exists:
                 print("vous avez affronté le garde sans les armes nécessaires, vous êtes mort !!!")
+            # If not, the player has won.
             else:
                 print("bravo !!!")
 
+            # We go out of the While loop.
+            cont = 0
 
-
+# Closes the window.
+pygame.quit()
