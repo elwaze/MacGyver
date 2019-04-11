@@ -57,7 +57,7 @@ cont = 1
 
 # Keeping the window opened until event QUIT happens (Alt + F4 or close cross)
 while cont:
-
+    pygame.time.Clock().tick(30)
     for event in pygame.event.get():
 
         if event.type == QUIT:
@@ -73,22 +73,11 @@ while cont:
                 mg_position = mc_giver.move('left', maze)  # Mg goes left for 1 sprite
 
         if mg_position == ether.position:
-            mc_giver.obj += 1
             ether.exists = 0
         elif mg_position == needle.position:
-            mc_giver.obj += 1
             needle.exists = 0
         elif mg_position == plastic_pipe.position:
-            mc_giver.obj += 1
             plastic_pipe.exists = 0
-
-        if maze.structure[mc_giver.sprite_y][mc_giver.sprite_x] == "a":
-            if mc_giver.obj == 3:
-                print("gagné !!!")
-            else:
-                print("vous avez affronté le garde sans les armes nécessaires, vous êtes mort !!!")
-                print(mc_giver.obj)
-
 
         maze.display(window)
         mc_giver.show(window)
@@ -99,6 +88,12 @@ while cont:
         if plastic_pipe.exists != 0:
             plastic_pipe.show(window)
         pygame.display.flip()
+
+        if maze.structure[mc_giver.sprite_y][mc_giver.sprite_x] == "a":
+            if ether.exists or needle.exists or plastic_pipe.exists:
+                print("vous avez affronté le garde sans les armes nécessaires, vous êtes mort !!!")
+            else:
+                print("bravo !!!")
 
 
 
