@@ -70,7 +70,7 @@ class Maze:
 
 
 class Player:
-    """Class used to create MacGyver"""
+    """Class used to create Mac Gyver."""
 
     def __init__(self, portrait):
         # Player's image.
@@ -87,74 +87,78 @@ class Player:
         self.obj = 0
 
     def show(self, window):
+        """Method used to display the player."""
         window.blit(self.portrait, self.position)
 
     def move(self, direction, model):
-        """Method to move the player"""
+        """Method used to move the player."""
 
-        # Déplacement vers la droite
+        # Moving to the right.
         if direction == 'right':
-            # Pour ne pas dépasser l'écran
+            # Staying in the window.
             if self.sprite_x < (size_in_sprites - 1):
-                # On vérifie que la case de destination n'est pas un mur
+                # Not going into a wall
                 if model.structure[self.sprite_y][self.sprite_x + 1] != 'w':
-                    # Déplacement d'une case
+                    # Moving one sprite right
                     self.sprite_x += 1
 
-        # Déplacement vers la gauche
+        # Moving to the left
         if direction == 'left':
             if self.sprite_x > 0:
                 if model.structure[self.sprite_y][self.sprite_x - 1] != 'w':
                     self.sprite_x -= 1
 
-        # Déplacement vers le haut
+        # Moving up
         if direction == 'up':
             if self.sprite_y > 0:
                 if model.structure[self.sprite_y - 1][self.sprite_x] != 'w':
                     self.sprite_y -= 1
 
-        # Déplacement vers le bas
+        # Moving down
         if direction == 'down':
             if self.sprite_y < (size_in_sprites - 1):
                 if model.structure[self.sprite_y + 1][self.sprite_x] != 'w':
                     self.sprite_y += 1
 
+        # New position.
         self.x = self.sprite_x * sprite_size
         self.y = self.sprite_y * sprite_size
         self.position = self.x, self.y
+
         return self.position
 
 
 class Collected:
-    """Class used to generate the objects that Mac Gyver has to collect"""
+    """Class used to generate the objects that Mac Gyver has to collect."""
 
     def __init__(self, img):
-        # object image
+        # Object image
         self.img = pygame.image.load(img).convert()
         self.img = pygame.transform.scale(self.img, (sprite_size, sprite_size))
 
-        # Position du personnage en cases et en pixels
+        # Object position initialization.
         self.sprite_x = 0
         self.sprite_y = 0
         self.x = self.sprite_x * sprite_size
         self.y = self.sprite_x * sprite_size
         self.position = self.x, self.y
+
+        # Object position defined ?.
         self.exists = 0
 
     def init_position(self, model):
-        # Position de l'obj en cases et en pixels
-        while self.exists == 0:          # tant que l'obj n'a pas de position
-            self.sprite_x = randint(0, size_in_sprites - 1)          # x = entier au hasard ds la lgr
-            self.sprite_y = randint(0, size_in_sprites - 1)          # y = entier au hazard ds la htr
-            if model.structure[self.sprite_y][self.sprite_x] != 'w':
-                if model.structure[self.sprite_y][self.sprite_x] != 'a':
-                    self.exists = 1
-
+        """Random initialization of the position of the objects."""
+        while self.exists == 0:          # While no valid position has been defined.
+            self.sprite_x = randint(0, size_in_sprites - 1)          # x = random integer in the length of the window
+            self.sprite_y = randint(0, size_in_sprites - 1)          # y = random integer in the height of the window
+            if model.structure[self.sprite_y][self.sprite_x] == '0':    # In a couloir.
+                self.exists = 1     # We have defined a valid position for this object
                 self.x = self.sprite_x * sprite_size
-                self.y = self.sprite_x * sprite_size
+                self.y = self.sprite_y * sprite_size
                 self.position = self.x, self.y
 
         return self.position
 
     def show(self, window):
+        """Method used to display the objects."""
         window.blit(self.img, self.position)

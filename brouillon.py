@@ -1,4 +1,3 @@
-
 #! /usr/bin env python3
 # coding: utf-8
 
@@ -26,6 +25,8 @@ pygame.init()
 
 # Window creation
 window = pygame.display.set_mode((window_size, window_size))
+pygame.display.set_caption("Mac Gyver")
+
 
 # Maze setting
 maze = Maze("maze.txt")
