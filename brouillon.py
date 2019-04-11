@@ -1,3 +1,4 @@
+
 #! /usr/bin env python3
 # coding: utf-8
 
@@ -19,49 +20,84 @@ from pygame.locals import *
 from classes import *
 from cons import *
 
-def main():
-    # Library initialization
-    pygame.init()
 
-    # Window creation
-    window = pygame.display.set_mode((window_size, window_size))
+# Library initialization
+pygame.init()
 
-    # Background filling
-    bckg = pygame.image.load(image_background).convert()
-    window.blit(bckg, (0, 0))
+# Window creation
+window = pygame.display.set_mode((window_size, window_size))
 
-    # Maze setting
-    maze = Maze("maze")
-    window.blit(maze)
+# Maze setting
+maze = Maze("maze.txt")
+maze.initialize_maze()
+maze.display(window)
 
-    # Mac Giver setting
-    mc_giver = Player(image_mg)
-    mg_position = mc_giver.position
-    window.blit(mc_giver, mg_position)
+# Mac Giver setting
+mc_giver = Player(image_mg)
+mg_position = mc_giver.position
+mc_giver.show(window)
 
-    # Screen refresh
-    pygame.display.flip()
+# objects setting
+ether = Collected(image_ether)
+ether.position = ether.init_position(maze)
+ether.show(window)
+needle = Collected(image_needle)
+needle.position = needle.init_position(maze)
+needle.show(window)
+plastic_pipe = Collected(image_plastic_pipe)
+plastic_pipe.position = plastic_pipe.init_position(maze)
+plastic_pipe.show(window)
 
-    # Cont setting true (to continue)
-    cont = 1
+# Screen refresh
+pygame.display.flip()
 
-    # Keeping the window opened until event QUIT happens (Alt + F4 or close cross)
-    while cont:
+# Cont setting true (to continue)
+cont = 1
 
-        for event in pygame.event.get():
+# Keeping the window opened until event QUIT happens (Alt + F4 or close cross)
+while cont:
 
-            if event.type == QUIT:
-                cont = 0
-            elif event.type == KEYDOWN:  # What happens if user press a key down
-                if event.key == K_DOWN:  # If down cursor key
-                    mg_position = mg_position.move('down')  # Mg goes down for 1 sprite
-                elif event.key == K_UP:  # If up cursor key
-                    mg_position = mg_position.move('up')  # Mg goes up for 1 sprite
-                elif event.key == K_RIGHT:  # If right cursor key
-                    mg_position = mg_position.move('right')  # Mg goes right for 1 sprite
-                elif event.key == K_LEFT:  # If left cursor key
-                    mg_position = mg_position.move('left')  # Mg goes left for 1 sprite
+    for event in pygame.event.get():
+
+        if event.type == QUIT:
+            cont = 0
+        elif event.type == KEYDOWN:  # What happens if user press a key down
+            if event.key == K_DOWN:  # If down cursor key
+                mg_position = mc_giver.move('down', maze)  # Mg goes down for 1 sprite
+            elif event.key == K_UP:  # If up cursor key
+                mg_position = mc_giver.move('up', maze)  # Mg goes up for 1 sprite
+            elif event.key == K_RIGHT:  # If right cursor key
+                mg_position = mc_giver.move('right', maze)  # Mg goes right for 1 sprite
+            elif event.key == K_LEFT:  # If left cursor key
+                mg_position = mc_giver.move('left', maze)  # Mg goes left for 1 sprite
+
+        if mg_position == ether.position:
+            mc_giver.obj += 1
+            ether.exists = 0
+        elif mg_position == needle.position:
+            mc_giver.obj += 1
+            needle.exists = 0
+        elif mg_position == plastic_pipe.position:
+            mc_giver.obj += 1
+            plastic_pipe.exists = 0
+
+        if maze.structure[mc_giver.sprite_y][mc_giver.sprite_x] == "a":
+            if mc_giver.obj == 3:
+                print("gagné !!!")
+            else:
+                print("vous avez affronté le garde sans les armes nécessaires, vous êtes mort !!!")
+                print(mc_giver.obj)
 
 
-if __name__ == __main__:
-    main()
+        maze.display(window)
+        mc_giver.show(window)
+        if ether.exists != 0:
+            ether.show(window)
+        if needle.exists != 0:
+            needle.show(window)
+        if plastic_pipe.exists != 0:
+            plastic_pipe.show(window)
+        pygame.display.flip()
+
+
+

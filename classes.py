@@ -12,19 +12,19 @@ from pygame.locals import *
 from cons import *
 from random import randint
 
+
 class Maze:
     """Class used to create the maze."""
 
     def __init__(self, file):
         self.file = file
-        self.structure = 0
+        self.structure = []
 
-    @classmethod
-    def initialize_maze(cls):
+    def initialize_maze(self):
         """Method used to generate the maze from the txt file:
         A list is created, containing one list by line contained in the file."""
         # We open the file and create the list of lines.
-        with open(cls.file, "r") as file:
+        with open(self.file, "r") as file:
             lines_n = []
             # We browse the lines of the file and create one list by line.
             for line in file:
@@ -38,18 +38,21 @@ class Maze:
                 # We add the list of the line to the lines list.
                 lines_n.append(line_n)
             # We save the structure of the maze.
-            cls.structure = lines_n
+            self.structure = lines_n
 
-    @classmethod
-    def display(cls, window):
+    def display(self, window):
         """Method used to display  the maze from the list we generated with the method initialize_maze."""
         # images (image of the arrival is the image of the guard standing on the arrival sprite).
         wall = pygame.image.load(image_wall).convert()
-        arrival = pygame.image.load(image_guard).convert_alpha()
+        wall = pygame.transform.scale(wall, (sprite_size, sprite_size))
+        arrival = pygame.image.load(image_guard).convert()
+        arrival = pygame.transform.scale(arrival, (sprite_size, sprite_size))
+        background = pygame.image.load(image_background).convert()
+        background = pygame.transform.scale(background, (sprite_size, sprite_size))
 
         # We browse the list we created with initialize_maze.
         line_num = 0
-        for line in cls.structure:
+        for line in self.structure:
             # We browse the list of sprites
             sprite_num = 0
             for sprite in line:
@@ -60,6 +63,8 @@ class Maze:
                     window.blit(wall, (x, y))
                 elif sprite == 'a':  # a = arrival
                     window.blit(arrival, (x, y))
+                elif (sprite == '0') or (sprite == 'd'):  # 0 = couloir
+                    window.blit(background, (x, y))
                 sprite_num += 1
             line_num += 1
 
@@ -69,17 +74,22 @@ class Player:
 
     def __init__(self, portrait):
         # Player's image.
-        self.portrait = pygame.image.load(portrait).convert_alpha()
+        self.portrait = pygame.image.load(portrait).convert()
+        self.portrait = pygame.transform.scale(self.portrait, (sprite_size, sprite_size))
+
         # Player's position (in sprites and in pixels).
         self.sprite_x = 0
         self.sprite_y = 0
-        self.x = 0
-        self.y = 0
+        self.x = self.sprite_x * sprite_size
+        self.y = self.sprite_y * sprite_size
         self.position = self.x, self.y
         # number of objects collected (counter).
         self.obj = 0
 
-    def move(self, direction):
+    def show(self, window):
+        window.blit(self.portrait, self.position)
+
+    def move(self, direction, model):
         """Method to move the player"""
 
         # Déplacement vers la droite
@@ -87,32 +97,32 @@ class Player:
             # Pour ne pas dépasser l'écran
             if self.sprite_x < (size_in_sprites - 1):
                 # On vérifie que la case de destination n'est pas un mur
-                if maze.structure[self.sprite_y][self.sprite_x + 1] != 'w':
+                if model.structure[self.sprite_y][self.sprite_x + 1] != 'w':
                     # Déplacement d'une case
                     self.sprite_x += 1
-                    # Calcul de la position "réelle" en pixel
-                    self.x = self.sprite_x * sprite_size
 
         # Déplacement vers la gauche
         if direction == 'left':
             if self.sprite_x > 0:
-                if maze.structure[self.sprite_y][self.sprite_x - 1] != 'w':
+                if model.structure[self.sprite_y][self.sprite_x - 1] != 'w':
                     self.sprite_x -= 1
-                    self.x = self.sprite_x * sprite_size
 
         # Déplacement vers le haut
         if direction == 'up':
             if self.sprite_y > 0:
-                if maze.structure[self.sprite_y - 1][self.sprite_x] != 'w':
+                if model.structure[self.sprite_y - 1][self.sprite_x] != 'w':
                     self.sprite_y -= 1
-                    self.y = self.sprite_y * sprite_size
 
         # Déplacement vers le bas
         if direction == 'down':
             if self.sprite_y < (size_in_sprites - 1):
-                if maze.structure[self.sprite_y + 1][self.sprite_x] != 'w':
+                if model.structure[self.sprite_y + 1][self.sprite_x] != 'w':
                     self.sprite_y += 1
-                    self.y = self.sprite_y * sprite_size
+
+        self.x = self.sprite_x * sprite_size
+        self.y = self.sprite_y * sprite_size
+        self.position = self.x, self.y
+        return self.position
 
 
 class Collected:
@@ -120,21 +130,31 @@ class Collected:
 
     def __init__(self, img):
         # object image
-        self.img = pygame.image.load(img).convert_alpha()
-        # Position du personnage en cases et en pixels
-        self.position = 0
+        self.img = pygame.image.load(img).convert()
+        self.img = pygame.transform.scale(self.img, (sprite_size, sprite_size))
 
-    def init_position(self):
-        # Position de l'obj en cases et en pixels
-        while position == 0:          # tant que l'obj n'a pas de position
-            self.sprite_x = randint(0, size_in_sprites - 1)          # x = entier au hasard ds la lgr
-            self.sprite_y = randint(0, size_in_sprites - 1)          # y = entier au hazard ds la htr
-            if maze.structure[self.sprite_y][self.sprite_x] != 'w':
-                if maze.structure[self.sprite_y][self.sprite_x] != 'a':
-                    position = 1
+        # Position du personnage en cases et en pixels
+        self.sprite_x = 0
+        self.sprite_y = 0
         self.x = self.sprite_x * sprite_size
         self.y = self.sprite_x * sprite_size
+        self.position = self.x, self.y
+        self.exists = 0
 
-    def picked(self):
-        # suppr un obj qd mg passe dessus
+    def init_position(self, model):
+        # Position de l'obj en cases et en pixels
+        while self.exists == 0:          # tant que l'obj n'a pas de position
+            self.sprite_x = randint(0, size_in_sprites - 1)          # x = entier au hasard ds la lgr
+            self.sprite_y = randint(0, size_in_sprites - 1)          # y = entier au hazard ds la htr
+            if model.structure[self.sprite_y][self.sprite_x] != 'w':
+                if model.structure[self.sprite_y][self.sprite_x] != 'a':
+                    self.exists = 1
 
+                self.x = self.sprite_x * sprite_size
+                self.y = self.sprite_x * sprite_size
+                self.position = self.x, self.y
+
+        return self.position
+
+    def show(self, window):
+        window.blit(self.img, self.position)

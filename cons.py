@@ -8,7 +8,7 @@ MacGyver.py constants
 
 # Window parameters
 size_in_sprites = 15
-sprite_size = 30
+sprite_size = 45
 window_size = size_in_sprites * sprite_size
 
 # Maze file
