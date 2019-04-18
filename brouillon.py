@@ -13,7 +13,7 @@ files : MacGyver.py, classes.py, cons.py, maze.txt, images
 
 
 # Modules importation.
-
+import os
 import pygame
 from pygame.locals import *
 from cons import *
@@ -29,10 +29,11 @@ pygame.init()
 window = pygame.display.set_mode((window_size, window_size))
 pygame.display.set_caption("Mac Gyver")
 
-
 # Maze setting.
 maze = Maze("maze.txt")
 maze.initialize_maze()
+print("test")
+os.system("pause")
 maze.display(window)
 
 # Mac Giver setting.
