@@ -16,8 +16,8 @@ window_size = size_in_sprites * sprite_size
 maze = "maze.txt"
 
 # list of images
-image_wall = "images/wall.png"
-image_background = "images/background.jpg"
+image_wall = "images/wall.xcf"
+image_background = "images/background.xcf"
 image_guard = "images/guard.png"
 image_mg = "images/mg.png"
 image_plastic_pipe = "images/plastic_pipe.png"

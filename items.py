@@ -1,70 +1,72 @@
 #! /usr/bin env python3
 # coding: utf-8
 
-
-"""
-File containing classes used in MacGyver.py.
-"""
-
+"""File containing the superclass Items, and its subclasses Player and Collected.
+Player is used to create MacGyver.
+Collected is used to generate the items MacGyver has to collect. """
 
 import pygame
-from pygame.locals import *
 from cons import *
 from random import randint
 
 
-
-
-
-class Player:
-    """Class used to create Mac Gyver."""
+class Item(object):
+    """Superclass defining the display and the position of the items appearing in the game.
+    Subclasses = Player and Collected. """
 
     def __init__(self, portrait):
-        # Player's image.
-        self.portrait = pygame.image.load(portrait).convert()
-        self.portrait = pygame.transform.scale(self.portrait, (sprite_size, sprite_size))
-
-        # Player's position (in sprites and in pixels).
+        # Item's image.
+        self.image = pygame.image.load(portrait).convert()
+        self.image = pygame.transform.scale(self.image, (sprite_size, sprite_size))
+        # Item's position.
         self.sprite_x = 0
         self.sprite_y = 0
         self.x = self.sprite_x * sprite_size
         self.y = self.sprite_y * sprite_size
         self.position = self.x, self.y
-        # number of objects collected (counter).
-        self.obj = 0
 
     def show(self, window):
-        """Method used to display the player."""
-        window.blit(self.portrait, self.position)
+        """Method used to display the item
+        :param : window : window where the game is displayed. """
+        window.blit(self.image, self.position)
 
-    def move(self, direction, model):
-        """Method used to move the player."""
+
+class Player(Item):
+    """Class used to create Mac Gyver. """
+
+    def __init__(self, image):
+        super().__init__(image)
+
+    def move(self, direction, maze):
+        """Method used to move the player.
+        :param : direction : direction defined by the key pressed.
+        :param : maze : model of the maze. """
 
         # Moving to the right.
         if direction == 'right':
             # Staying in the window.
             if self.sprite_x < (size_in_sprites - 1):
                 # Not going into a wall
-                if model.structure[self.sprite_y][self.sprite_x + 1] != 'w':
+                if maze.structure[self.sprite_y][self.sprite_x + 1] != 'w':
                     # Moving one sprite right
                     self.sprite_x += 1
 
         # Moving to the left
         if direction == 'left':
             if self.sprite_x > 0:
-                if model.structure[self.sprite_y][self.sprite_x - 1] != 'w':
+                if maze.structure[self.sprite_y][self.sprite_x - 1] != 'w':
                     self.sprite_x -= 1
 
         # Moving up
         if direction == 'up':
             if self.sprite_y > 0:
-                if model.structure[self.sprite_y - 1][self.sprite_x] != 'w':
+                if maze.structure[self.sprite_y - 1][self.sprite_x] != 'w':
                     self.sprite_y -= 1
 
         # Moving down
         if direction == 'down':
             if self.sprite_y < (size_in_sprites - 1):
-                if model.structure[self.sprite_y + 1][self.sprite_x] != 'w':
+                if maze.structure[self.sprite_y + 1][self.sprite_x] != 'w':
                     self.sprite_y += 1
 
         # New position.
@@ -75,21 +77,11 @@ class Player:
         return self.position
 
 
-class Collected:
+class Collected(Item):
     """Class used to generate the objects that Mac Gyver has to collect."""
 
-    def __init__(self, img):
-        # Object image
-        self.img = pygame.image.load(img).convert()
-        self.img = pygame.transform.scale(self.img, (sprite_size, sprite_size))
-
-        # Object position initialization.
-        self.sprite_x = 0
-        self.sprite_y = 0
-        self.x = self.sprite_x * sprite_size
-        self.y = self.sprite_x * sprite_size
-        self.position = self.x, self.y
-
+    def __init__(self, image):
+        super().__init__(image)
         # Object position defined ?.
         self.exists = 0
 
@@ -105,7 +97,3 @@ class Collected:
                 self.position = self.x, self.y
 
         return self.position
-
-    def show(self, window):
-        """Method used to display the objects."""
-        window.blit(self.img, self.position)
