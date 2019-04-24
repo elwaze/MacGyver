@@ -4,7 +4,7 @@
 """File containing the class Maze, used to create the maze."""
 
 import pygame
-from cons import *
+import cons
 
 
 class Maze(object):
@@ -37,12 +37,12 @@ class Maze(object):
         """Method used to display  the maze from the list we generated with the method initialize_maze.
         :param : window : window where the maze is displayed"""
         # images (image of the arrival is the image of the guard standing on the arrival sprite).
-        wall = pygame.image.load(IMAGE_WALL).convert()
-        wall = pygame.transform.scale(wall, (SPRITE_SIZE, SPRITE_SIZE))
-        arrival = pygame.image.load(IMAGE_GUARD).convert()
-        arrival = pygame.transform.scale(arrival, (SPRITE_SIZE, SPRITE_SIZE))
-        background = pygame.image.load(IMAGE_BACKGROUND).convert()
-        background = pygame.transform.scale(background, (SPRITE_SIZE, SPRITE_SIZE))
+        wall = pygame.image.load(cons.IMAGE_WALL).convert()
+        wall = pygame.transform.scale(wall, (cons.SPRITE_SIZE, cons.SPRITE_SIZE))
+        arrival = pygame.image.load(cons.IMAGE_GUARD).convert()
+        arrival = pygame.transform.scale(arrival, (cons.SPRITE_SIZE, cons.SPRITE_SIZE))
+        background = pygame.image.load(cons.IMAGE_BACKGROUND).convert()
+        background = pygame.transform.scale(background, (cons.SPRITE_SIZE, cons.SPRITE_SIZE))
 
         # We browse the list we created with initialize_maze.
         line_num = 0
@@ -51,8 +51,8 @@ class Maze(object):
             sprite_num = 0
             for sprite in line:
                 # We calculate the real position (in pixels).
-                x = sprite_num * SPRITE_SIZE
-                y = line_num * SPRITE_SIZE
+                x = sprite_num * cons.SPRITE_SIZE
+                y = line_num * cons.SPRITE_SIZE
                 if sprite == 'w':  # w = wall
                     window.blit(wall, (x, y))
                 elif sprite == 'a':  # a = arrival

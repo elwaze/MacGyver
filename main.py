@@ -14,8 +14,8 @@ files : main.py, maze.py, items.py, cons.py, maze.txt, images, font
 
 # Modules importation.
 import pygame
-from pygame.locals import *
-from cons import *
+import pygame.locals
+import cons
 from maze import Maze
 from items import Player
 from items import Collected
@@ -27,29 +27,29 @@ def main():
     pygame.init()
 
     # Window creation.
-    window = pygame.display.set_mode((WINDOW_SIZE, WINDOW_SIZE))
+    window = pygame.display.set_mode((cons.WINDOW_SIZE, cons.WINDOW_SIZE))
     pygame.display.set_caption("Mac Gyver")
 
     # Maze setting.
-    maze = Maze(MAZE)
+    maze = Maze(cons.MAZE)
     maze.initialize_maze()
     maze.display(window)
 
     # Mac Giver setting.
-    mc_giver = Player(IMAGE_MG)
+    mc_giver = Player(cons.IMAGE_MG)
     mc_giver.show(window)
 
     # objects setting.
-    ether = Collected(IMAGE_ETHER)
+    ether = Collected(cons.IMAGE_ETHER)
     ether.position = ether.init_position(maze)
     ether.show(window)
-    needle = Collected(IMAGE_NEEDLE)
+    needle = Collected(cons.IMAGE_NEEDLE)
     needle.position = needle.init_position(maze)
     needle.show(window)
-    plastic_pipe = Collected(IMAGE_PLASTIC_PIPE)
+    plastic_pipe = Collected(cons.IMAGE_PLASTIC_PIPE)
     plastic_pipe.position = plastic_pipe.init_position(maze)
     plastic_pipe.show(window)
-    syringe = Collected(IMAGE_SYRINGE)
+    syringe = Collected(cons.IMAGE_SYRINGE)
 
     # Screen refresh.
     pygame.display.flip()
@@ -63,17 +63,17 @@ def main():
         :param: text: text to display"""
 
         # Replacing the maze by a simple background.
-        background = pygame.Surface((WINDOW_SIZE, WINDOW_SIZE))
+        background = pygame.Surface((cons.WINDOW_SIZE, cons.WINDOW_SIZE))
         background.fill((255, 100, 0))
         window.blit(background, (0, 0))
 
         # Displaying the text depending on the outcome of the game.
-        font = pygame.font.Font(FONT, 36)
+        font = pygame.font.Font(cons.FONT, 36)
         i = 0
         for line in text.splitlines():
-            i += SPRITE_SIZE
+            i += cons.SPRITE_SIZE
             text = font.render(line, 1, (0, 0, 0))
-            text_rect = text.get_rect(center=(WINDOW_SIZE / 2, (WINDOW_SIZE / 4) + i))
+            text_rect = text.get_rect(center=(cons.WINDOW_SIZE / 2, (cons.WINDOW_SIZE / 4) + i))
             window.blit(text, text_rect)
             pygame.display.flip()
         pygame.time.wait(4000)
@@ -82,16 +82,16 @@ def main():
     while cont:
         pygame.time.Clock().tick(30)  # Saving processor resources.
         for event in pygame.event.get():
-            if event.type == QUIT:  # If event QUIT, we go out of the while loop.
+            if event.type == pygame.locals.QUIT:  # If event QUIT, we go out of the while loop.
                 cont = 0
-            elif event.type == KEYDOWN:  # What happens if user press a key down.
-                if event.key == K_DOWN:  # If down cursor key.
+            elif event.type == pygame.locals.KEYDOWN:  # What happens if user press a key down.
+                if event.key == pygame.locals.K_DOWN:  # If down cursor key.
                     mc_giver.position = mc_giver.move('down', maze)  # Mg goes down for 1 sprite.
-                elif event.key == K_UP:  # If up cursor key.
+                elif event.key == pygame.locals.K_UP:  # If up cursor key.
                     mc_giver.position = mc_giver.move('up', maze)  # Mg goes up for 1 sprite.
-                elif event.key == K_RIGHT:  # If right cursor key.
+                elif event.key == pygame.locals.K_RIGHT:  # If right cursor key.
                     mc_giver.position = mc_giver.move('right', maze)  # Mg goes right for 1 sprite.
-                elif event.key == K_LEFT:  # If left cursor key.
+                elif event.key == pygame.locals.K_LEFT:  # If left cursor key.
                     mc_giver.position = mc_giver.move('left', maze)  # Mg goes left for 1 sprite.
 
             if mc_giver.position == ether.position:  # Mac Gyver picked the ether.
