@@ -124,7 +124,7 @@ def main():
             # When Mac Gyver arrives to the guard position (sprite "a").
             if maze.structure[mc_giver.sprite_y][mc_giver.sprite_x] == "a":
                 # We check if there are still objects to pick in the maze
-                if syringe.exists:
+                if syringe.exists == 0:
                     text_display("Vous vous êtes présenté devant \n" 
                                  "le garde sans les armes \n"
                                  "nécessaires... \n"
