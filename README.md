@@ -6,5 +6,5 @@ The aim of this project was to create a game where the player has to move Mac Gi
 Before trying to escape, he has to collect 3 objects on his way.
 
 Python script.  
-files : MacGyver.py, classes.py, cons.py, maze.txt, images
+files : MacGyver.py, items.py, maze.py, cons.py, maze.txt, images
 

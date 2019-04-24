@@ -82,7 +82,7 @@ class Collected(Item):
 
     def __init__(self, image):
         super().__init__(image)
-        # Object position defined ?.
+        # Object position not yet defined.
         self.exists = 0
 
     def init_position(self, model):

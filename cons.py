@@ -3,7 +3,7 @@
 
 
 """
-MacGyver.py constants
+MacGyver.py constants.
 """
 
 # Window parameters
