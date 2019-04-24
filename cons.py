@@ -14,7 +14,7 @@ WINDOW_SIZE = SIZE_IN_SPRITES * SPRITE_SIZE
 # Maze file.
 MAZE = "maze.txt"
 
-# list of images.
+# Images.
 IMAGE_WALL = "images/wall.xcf"
 IMAGE_BACKGROUND = "images/background.xcf"
 IMAGE_GUARD = "images/guard.png"
@@ -25,5 +25,4 @@ IMAGE_ETHER = "images/ether.png"
 IMAGE_SYRINGE = "images/syringe.png"
 
 # Font.
-
 FONT = "font/font.otf"

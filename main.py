@@ -96,6 +96,7 @@ def main():
 
             if mc_giver.position == ether.position:  # Mac Gyver picked the ether.
                 ether.exists = 0
+
             elif mc_giver.position == needle.position:  # Mac Gyver picked the needle.
                 needle.exists = 0
             elif mc_giver.position == plastic_pipe.position:  # Mac Gyver picked the plastic pipe.
@@ -137,7 +138,7 @@ def main():
                                  "vous avez vaincu le garde, \n"
                                  "vous vous échapez !")
 
-                # We go out of the While loop
+                # We go out of the While loop.
                 cont = 0
 
     # Closes the window.

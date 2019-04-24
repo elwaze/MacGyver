@@ -36,7 +36,7 @@ class Maze(object):
     def display(self, window):
         """Method used to display  the maze from the list we generated with the method initialize_maze.
         :param : window : window where the maze is displayed"""
-        # images (image of the arrival is the image of the guard standing on the arrival sprite).
+        # Images (image of the arrival is the image of the guard standing on the arrival sprite).
         wall = pygame.image.load(cons.IMAGE_WALL).convert()
         wall = pygame.transform.scale(wall, (cons.SPRITE_SIZE, cons.SPRITE_SIZE))
         arrival = pygame.image.load(cons.IMAGE_GUARD).convert()
@@ -47,7 +47,7 @@ class Maze(object):
         # We browse the list we created with initialize_maze.
         line_num = 0
         for line in self.structure:
-            # We browse the list of sprites
+            # We browse the list of sprites.
             sprite_num = 0
             for sprite in line:
                 # We calculate the real position (in pixels).
@@ -57,7 +57,7 @@ class Maze(object):
                     window.blit(wall, (x, y))
                 elif sprite == 'a':  # a = arrival
                     window.blit(arrival, (x, y))
-                elif (sprite == '0') or (sprite == 'd'):  # 0 = path
+                elif (sprite == '0') or (sprite == 'd') or (sprite == "x"):  # 0 = path
                     window.blit(background, (x, y))
                 sprite_num += 1
             line_num += 1
