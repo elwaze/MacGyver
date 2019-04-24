@@ -1,11 +1,36 @@
 #! /usr/bin env python3
 # coding: utf-8
+import sys
+import cx_Freeze as cx
 
-from cx_Freeze import setup, Executable
 
-setup(
+base = None
+if sys.platform == "win32":
+    base = "Win32GUI"
+
+includes = [
+    "pygame", "os"
+]
+
+include_files = "maze.txt", "images", "README.md", "font"
+
+options = {
+    'build_exe': {
+        'includes': includes,
+        'include_files': include_files,
+    }
+}
+
+executable = cx.Executable(
+    base=base,
+    script="main.py",
+    targetName="mac_gyver.exe",
+)
+
+cx.setup(
     name="MacGyver",
     version="0.1",
-    description="MacGyver game",
-    executables=[Executable("brouillon.py")],
+    description="MacGyver maze game",
+    options=options,
+    executables=[executable],
 )

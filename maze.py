@@ -25,11 +25,9 @@ class Maze(object):
             for line in file:
                 line_n = []
                 # We browse the sprites (symbolized by letters) in the file.
-                for sprite in line:
-                    # We ignore the line breaks.
-                    if sprite != '\n':
-                        # We add the sprite to the list.
-                        line_n.append(sprite)
+                for sprite in line.strip():
+                    # We add the sprite to the list.
+                    line_n.append(sprite)
                 # We add the list of the line to the lines list.
                 lines_n.append(line_n)
             # We save the structure of the maze.
@@ -39,12 +37,12 @@ class Maze(object):
         """Method used to display  the maze from the list we generated with the method initialize_maze.
         :param : window : window where the maze is displayed"""
         # images (image of the arrival is the image of the guard standing on the arrival sprite).
-        wall = pygame.image.load(image_wall).convert()
-        wall = pygame.transform.scale(wall, (sprite_size, sprite_size))
-        arrival = pygame.image.load(image_guard).convert()
-        arrival = pygame.transform.scale(arrival, (sprite_size, sprite_size))
-        background = pygame.image.load(image_background).convert()
-        background = pygame.transform.scale(background, (sprite_size, sprite_size))
+        wall = pygame.image.load(IMAGE_WALL).convert()
+        wall = pygame.transform.scale(wall, (SPRITE_SIZE, SPRITE_SIZE))
+        arrival = pygame.image.load(IMAGE_GUARD).convert()
+        arrival = pygame.transform.scale(arrival, (SPRITE_SIZE, SPRITE_SIZE))
+        background = pygame.image.load(IMAGE_BACKGROUND).convert()
+        background = pygame.transform.scale(background, (SPRITE_SIZE, SPRITE_SIZE))
 
         # We browse the list we created with initialize_maze.
         line_num = 0
@@ -53,13 +51,13 @@ class Maze(object):
             sprite_num = 0
             for sprite in line:
                 # We calculate the real position (in pixels).
-                x = sprite_num * sprite_size
-                y = line_num * sprite_size
+                x = sprite_num * SPRITE_SIZE
+                y = line_num * SPRITE_SIZE
                 if sprite == 'w':  # w = wall
                     window.blit(wall, (x, y))
                 elif sprite == 'a':  # a = arrival
                     window.blit(arrival, (x, y))
-                elif (sprite == '0') or (sprite == 'd'):  # 0 = passage
+                elif (sprite == '0') or (sprite == 'd'):  # 0 = path
                     window.blit(background, (x, y))
                 sprite_num += 1
             line_num += 1

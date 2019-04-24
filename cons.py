@@ -6,20 +6,24 @@
 MacGyver.py constants.
 """
 
-# Window parameters
-size_in_sprites = 15
-sprite_size = 35
-window_size = size_in_sprites * sprite_size
+# Window parameters.
+SIZE_IN_SPRITES = 15
+SPRITE_SIZE = 35
+WINDOW_SIZE = SIZE_IN_SPRITES * SPRITE_SIZE
 
-# Maze file
+# Maze file.
+MAZE = "maze.txt"
 
-maze = "maze.txt"
+# list of images.
+IMAGE_WALL = "images/wall.xcf"
+IMAGE_BACKGROUND = "images/background.xcf"
+IMAGE_GUARD = "images/guard.png"
+IMAGE_MG = "images/mg.png"
+IMAGE_PLASTIC_PIPE = "images/plastic_pipe.png"
+IMAGE_NEEDLE = "images/needle.png"
+IMAGE_ETHER = "images/ether.png"
+IMAGE_SYRINGE = "images/syringe.png"
 
-# list of images
-image_wall = "images/wall.xcf"
-image_background = "images/background.xcf"
-image_guard = "images/guard.png"
-image_mg = "images/mg.png"
-image_plastic_pipe = "images/plastic_pipe.png"
-image_needle = "images/needle.png"
-image_ether = "images/ether.png"
+# Font.
+
+FONT = "font/font.otf"
