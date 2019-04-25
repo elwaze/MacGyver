@@ -4,6 +4,7 @@
 """File containing the class initialize, used to initialize the game."""
 import items
 
+
 class Initialize(object):
     """Class used to initialize the game."""
     def run(self):

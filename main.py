@@ -4,7 +4,7 @@
 
 """
 Mac Giver game :
-Game where the player has to move Mac Giver through a maze with the cursor keys.
+Game where the player has to move Mac Giver through a maze with the cursor movement keys.
 Before trying to escape, he has to collect 3 objects on his way.
 
 Python script.
@@ -85,13 +85,13 @@ def main():
             if event.type == pygame.locals.QUIT:  # If event QUIT, we go out of the while loop.
                 cont = 0
             elif event.type == pygame.locals.KEYDOWN:  # What happens if user press a key down.
-                if event.key == pygame.locals.K_DOWN:  # If down cursor key.
+                if event.key == pygame.locals.K_DOWN:  # If down cursor movement key.
                     mc_giver.position = mc_giver.move('down', maze)  # Mg goes down for 1 sprite.
-                elif event.key == pygame.locals.K_UP:  # If up cursor key.
+                elif event.key == pygame.locals.K_UP:  # If up cursor movement key.
                     mc_giver.position = mc_giver.move('up', maze)  # Mg goes up for 1 sprite.
-                elif event.key == pygame.locals.K_RIGHT:  # If right cursor key.
+                elif event.key == pygame.locals.K_RIGHT:  # If right cursor movement key.
                     mc_giver.position = mc_giver.move('right', maze)  # Mg goes right for 1 sprite.
-                elif event.key == pygame.locals.K_LEFT:  # If left cursor key.
+                elif event.key == pygame.locals.K_LEFT:  # If left cursor movement key.
                     mc_giver.position = mc_giver.move('left', maze)  # Mg goes left for 1 sprite.
 
             if mc_giver.position == ether.position:  # Mac Gyver picked the ether.
