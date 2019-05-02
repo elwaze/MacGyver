@@ -67,7 +67,7 @@ class Run(object):
                 # What happens if user press a key down.
                 elif event.type == pygame.locals.KEYDOWN:
                     ek = event.key
-                    Run.move(self, ek)
+                    Run.ask_move(self, ek)
 
                 # Mac Gyver picked one of the objects.
                 if self.mc_giver.position == self.ether.position:
@@ -100,13 +100,18 @@ class Run(object):
                 pygame.display.flip()
 
                 # When Mac Gyver arrives to the guard position (sprite "a").
-                if self.maze.structure[self.mc_giver.sprite_y][self.mc_giver.sprite_x] == "a":
+                arrived_x = self.mc_giver.sprite_x
+                arrived_y = self.mc_giver.sprite_y
+                if self.maze.structure[arrived_x][arrived_y] == "a":
                     cont = Run.arrival(self)
 
         # Closes the window.
         pygame.quit()
 
     def arrival(self):
+        """Function to check
+        if the player has collected every object needed,
+        and prompt the end of game message."""
         # We check if there are still objects to pick in the maze
         if self.syringe.exists == 0:
             self.maze.text_display(self.window,
@@ -124,7 +129,9 @@ class Run(object):
         # We go out of the While loop.
         return 0
 
-    def move(self, ek):
+    def ask_move(self, ek):
+        """Function to call the player's move function
+        when a cursor movement key has been pressed."""
         # If down cursor movement key.
         if ek == pygame.locals.K_DOWN:
             # Mg goes down for 1 sprite.

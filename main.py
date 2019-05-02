@@ -15,7 +15,7 @@ files : main.py, play.py, maze.py, items.py, cons.py, maze.txt, images, font
 
 # Modules importation.
 
-from play import Run
+from run import Run
 
 
 def main():

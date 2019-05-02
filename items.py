@@ -25,6 +25,7 @@ class Item(object):
         # Item's position.
         self.sprite_x = 0
         self.sprite_y = 0
+        self.s_p = self.sprite_x, self.sprite_y
         self.x = self.sprite_x * cons.SPRITE_SIZE
         self.y = self.sprite_y * cons.SPRITE_SIZE
         self.position = self.x, self.y
