@@ -73,3 +73,24 @@ class Maze(object):
                     window.blit(background, (x, y))
                 sprite_num += 1
             line_num += 1
+
+    # display of the end of the game
+    def text_display(self, window, text):
+        """method to display text in the window
+        :param: text: text to display"""
+
+        # Replacing the maze by a simple background.
+        background = pygame.Surface((cons.WINDOW_SIZE, cons.WINDOW_SIZE))
+        background.fill((255, 100, 0))
+        window.blit(background, (0, 0))
+
+        # Displaying the text depending on the outcome of the game.
+        font = pygame.font.Font(cons.FONT, 36)
+        i = 0
+        for line in text.splitlines():
+            i += cons.SPRITE_SIZE
+            text = font.render(line, 1, (0, 0, 0))
+            text_rect = text.get_rect(center=(cons.WINDOW_SIZE / 2, (cons.WINDOW_SIZE / 4) + i))
+            window.blit(text, text_rect)
+            pygame.display.flip()
+        pygame.time.wait(4000)
