@@ -90,7 +90,8 @@ class Maze(object):
         for line in text.splitlines():
             i += cons.SPRITE_SIZE
             text = font.render(line, 1, (0, 0, 0))
-            text_rect = text.get_rect(center=(cons.WINDOW_SIZE / 2, (cons.WINDOW_SIZE / 4) + i))
+            text_rect = text.get_rect(
+                center=(cons.WINDOW_SIZE / 2, (cons.WINDOW_SIZE / 4) + i))
             window.blit(text, text_rect)
             pygame.display.flip()
         pygame.time.wait(4000)

@@ -4,7 +4,8 @@
 
 """
 Mac Giver game :
-Game where the player has to move Mac Giver through a maze with the cursor movement keys.
+Game where the player has to move Mac Giver through a maze
+with the cursor movement keys.
 Before trying to escape, he has to collect 3 objects on his way.
 
 Python script.
