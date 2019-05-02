@@ -109,7 +109,7 @@ class Run(object):
                                                "À l'aide de la seringue \n"
                                                "que vous avez fabriquée, \n"
                                                "vous avez vaincu le garde, \n"
-                                               "vous vous échapez !")
+                                               "vous vous échappez !")
 
                     # We go out of the While loop.
                     cont = 0
