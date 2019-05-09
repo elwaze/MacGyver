@@ -68,7 +68,7 @@ class Runner(object):
                 # What happens if user press a key down.
                 elif event.type == pygame.locals.KEYDOWN:
                     ek = event.key
-                    Runner.ask_move(self, ek)
+                    self.handle_move(ek)
 
                 # Mac Gyver picked one of the objects.
                 if self.mc_giver.position == self.ether.position:
@@ -104,7 +104,7 @@ class Runner(object):
                 arrived_x = self.mc_giver.sprite_x
                 arrived_y = self.mc_giver.sprite_y
                 if self.maze.structure[arrived_x][arrived_y] == "a":
-                    cont = Runner.arrival(self)
+                    cont = self.arrival()
 
         # Closes the window.
         pygame.quit()
@@ -131,7 +131,7 @@ class Runner(object):
         # We go out of the While loop.
         return 0
 
-    def ask_move(self, ek):
+    def handle_move(self, ek):
         """Function to call the player's move function
         when a cursor movement key has been pressed.
         :param: ek: event.key from pygame.event.get()"""
