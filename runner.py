@@ -34,9 +34,9 @@ class Runner(object):
         self.maze.initialize_maze()
         self.maze.display(self.window)
 
-        # Mac Giver setting.
-        self.mc_giver = Player(cons.IMAGE_MG)
-        self.mc_giver.show(self.window)
+        # MacGyver setting.
+        self.mc_gyver = Player(cons.IMAGE_MG)
+        self.mc_gyver.show(self.window)
 
         # objects setting.
         self.ether = Item(cons.IMAGE_ETHER)
@@ -73,16 +73,16 @@ class Runner(object):
                     self.handle_move(ek)
 
                 # Mac Gyver picked one of the objects.
-                if self.mc_giver.position == self.ether.position:
+                if self.mc_gyver.position == self.ether.position:
                     self.ether.exists = 0
-                elif self.mc_giver.position == self.needle.position:
+                elif self.mc_gyver.position == self.needle.position:
                     self.needle.exists = 0
-                elif self.mc_giver.position == self.plastic_pipe.position:
+                elif self.mc_gyver.position == self.plastic_pipe.position:
                     self.plastic_pipe.exists = 0
 
                 # Re-pasting after the event loop.
                 self.maze.display(self.window)
-                self.mc_giver.show(self.window)
+                self.mc_gyver.show(self.window)
 
                 # Checking if we can make the syringe.
                 if (self.ether.exists == 0 and
@@ -103,8 +103,8 @@ class Runner(object):
                 pygame.display.flip()
 
                 # When Mac Gyver arrives to the guard position (sprite "a").
-                arrived_x = self.mc_giver.sprite_x
-                arrived_y = self.mc_giver.sprite_y
+                arrived_x = self.mc_gyver.sprite_x
+                arrived_y = self.mc_gyver.sprite_y
                 if self.maze.structure[arrived_x][arrived_y] == "a":
                     cont = self.arrival()
 
@@ -146,17 +146,17 @@ class Runner(object):
         # If down cursor movement key.
         if ek == pygame.locals.K_DOWN:
             # Mg goes down for 1 sprite.
-            self.mc_giver.position = self.mc_giver.move(
+            self.mc_gyver.position = self.mc_gyver.move(
                 'down', self.maze)
         # Up.
         elif ek == pygame.locals.K_UP:
-            self.mc_giver.position = self.mc_giver.move(
+            self.mc_gyver.position = self.mc_gyver.move(
                 'up', self.maze)
         # Right.
         elif ek == pygame.locals.K_RIGHT:
-            self.mc_giver.position = self.mc_giver.move(
+            self.mc_gyver.position = self.mc_gyver.move(
                 'right', self.maze)
         # Left.
         elif ek == pygame.locals.K_LEFT:
-            self.mc_giver.position = self.mc_giver.move(
+            self.mc_gyver.position = self.mc_gyver.move(
                 'left', self.maze)
