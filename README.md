@@ -1,14 +1,14 @@
 # MacGyver
 
-## OpenClassrooms : 3rd project : create a maze with pygame 
+## OpenClassrooms: 3rd project: create a maze with pygame 
 
-The aim of this project was to create a game where the player has to move Mac Giver through a maze with the cursor movement keys.  
+The aim of this project was to create a game where the player has to move Mac Gyver through a maze with the cursor movement keys.  
 Before trying to escape, he has to collect 3 objects on his way.
 
 Python script.  
-files : main.py, runner.py, items.py, maze.py, cons.py, maze.txt, images, font
+files: main.py, runner.py, items.py, maze.py, cons.py, maze.txt, images, font
 
-## How to play :
+## How to play:
 
 To start playing, open the mac_gyver.exe file.
 Then you can move Mac Gyver by using the cursor movement keys. 

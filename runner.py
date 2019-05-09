@@ -10,12 +10,14 @@ import pygame.locals
 
 from maze import Maze
 from items import Player
-from items import Collected
+from items import Item
 
 
 class Runner(object):
     """Class used to initialize the elements of the maze and
-    run the loop playing the game."""
+    run the loop playing the game.
+
+    """
 
     def __init__(self):
 
@@ -37,21 +39,21 @@ class Runner(object):
         self.mc_giver.show(self.window)
 
         # objects setting.
-        self.ether = Collected(cons.IMAGE_ETHER)
+        self.ether = Item(cons.IMAGE_ETHER)
         self.ether.position = self.ether.init_position(self.maze)
         self.ether.show(self.window)
-        self.needle = Collected(cons.IMAGE_NEEDLE)
+        self.needle = Item(cons.IMAGE_NEEDLE)
         self.needle.position = self.needle.init_position(self.maze)
         self.needle.show(self.window)
-        self.plastic_pipe = Collected(cons.IMAGE_PLASTIC_PIPE)
+        self.plastic_pipe = Item(cons.IMAGE_PLASTIC_PIPE)
         self.plastic_pipe.position = self.plastic_pipe.init_position(self.maze)
         self.plastic_pipe.show(self.window)
-        self.syringe = Collected(cons.IMAGE_SYRINGE)
+        self.syringe = Item(cons.IMAGE_SYRINGE)
 
         # Screen refresh.
         pygame.display.flip()
 
-    def runner(self):
+    def run(self):
         """Function containing the main loop of the game."""
 
         # Cont setting true (to continue).
@@ -83,9 +85,9 @@ class Runner(object):
                 self.mc_giver.show(self.window)
 
                 # Checking if we can make the syringe.
-                if self.ether.exists == 0 and \
-                        self.needle.exists == 0 and \
-                        self.plastic_pipe.exists == 0:
+                if (self.ether.exists == 0 and
+                        self.needle.exists == 0 and
+                        self.plastic_pipe.exists == 0):
                     self.syringe.exists = 1
 
                 # If not, displaying the remaining objects.
@@ -112,7 +114,9 @@ class Runner(object):
     def arrival(self):
         """Function to check
         if the player has collected every object needed,
-        and prompt the end of game message."""
+        and prompt the end of game message.
+
+        """
 
         # We check if there are still objects to pick in the maze
         if self.syringe.exists == 0:
@@ -134,7 +138,10 @@ class Runner(object):
     def handle_move(self, ek):
         """Function to call the player's move function
         when a cursor movement key has been pressed.
-        :param: ek: event.key from pygame.event.get()"""
+
+        :param ek: event.key from pygame.event.get()
+
+        """
 
         # If down cursor movement key.
         if ek == pygame.locals.K_DOWN:

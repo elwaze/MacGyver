@@ -12,17 +12,17 @@ SPRITE_SIZE = 35
 WINDOW_SIZE = SIZE_IN_SPRITES * SPRITE_SIZE
 
 # Maze file.
-MAZE = "maze.txt"
+MAZE = "resources/maze.txt"
 
 # Images.
-IMAGE_WALL = "images/wall.xcf"
-IMAGE_BACKGROUND = "images/background.xcf"
-IMAGE_GUARD = "images/guard.png"
-IMAGE_MG = "images/mg.png"
-IMAGE_PLASTIC_PIPE = "images/plastic_pipe.png"
-IMAGE_NEEDLE = "images/needle.png"
-IMAGE_ETHER = "images/ether.png"
-IMAGE_SYRINGE = "images/syringe.png"
+IMAGE_WALL = "resources/images/wall.png"
+IMAGE_BACKGROUND = "resources/images/background.png"
+IMAGE_GUARD = "resources/images/guard.png"
+IMAGE_MG = "resources/images/mg.png"
+IMAGE_PLASTIC_PIPE = "resources/images/plastic_pipe.png"
+IMAGE_NEEDLE = "resources/images/needle.png"
+IMAGE_ETHER = "resources/images/ether.png"
+IMAGE_SYRINGE = "resources/images/syringe.png"
 
 # Font.
-FONT = "font/font.otf"
+FONT = "resources/font/font.otf"

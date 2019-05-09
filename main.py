@@ -3,13 +3,14 @@
 
 
 """
-Mac Giver game :
+Mac Giver game:
 Game where the player has to move Mac Giver through a maze
 with the cursor movement keys.
 Before trying to escape, he has to collect 3 objects on his way.
 
 Python script.
-files : main.py, runner.py, maze.py, items.py, cons.py, maze.txt, images, font
+files: main.py, runner.py, maze.py, items.py, cons.py, resources (maze.txt, images, font)
+
 """
 
 
@@ -23,7 +24,7 @@ def main():
 
     runner = Runner()
 
-    return Runner.runner(runner)
+    return runner.run()
 
 
 if __name__ == '__main__':

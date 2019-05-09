@@ -1,11 +1,13 @@
 #! /usr/bin env python3
 # coding: utf-8
 
-"""File containing the superclass Items,
-and its subclasses Player and Collected.
+"""File containing the superclass ItemBase,
+and its subclasses Player and Item.
 Player is used to create MacGyver.
-Collected is used to generate
-the items MacGyver has to collect. """
+Item is used to generate
+the items MacGyver has to collect.
+
+"""
 
 import pygame
 import cons
@@ -13,12 +15,20 @@ import cons
 from random import randint
 
 
-class Item(object):
+class ItemBase(object):
     """Superclass defining the display and the
     position of the items appearing in the game.
-    Subclasses = Player and Collected. """
+    Subclasses = Player and Item.
+
+    """
 
     def __init__(self, portrait):
+        """Constructor.
+
+        :param portrait: file containing the image of the item.
+
+        """
+
         # Item's image.
         self.image = pygame.image.load(portrait).convert()
         self.image = pygame.transform.scale(
@@ -33,22 +43,35 @@ class Item(object):
 
     def show(self, window):
         """Method used to display the item
-        :param : window : window on which the game is displayed. """
+
+        :param window: window on which the game is displayed.
+
+        """
 
         window.blit(self.image, self.position)
 
 
-class Player(Item):
+class Player(ItemBase):
     """Class used to create Mac Gyver.
-    It's an Item's child."""
+    It's an ItemBase's child.
+
+    """
 
     def __init__(self, image):
+        """Constructor.
+        :param image: file containing the image of the player.
+
+        """
+
         super().__init__(image)
 
     def move(self, direction, maze):
         """Method used to move the player.
-        :param : direction : direction defined by the key pressed.
-        :param : maze : model of the maze. """
+
+        :param direction: direction defined by the key pressed.
+        :param maze: model of the maze.
+
+        """
 
         # Moving to the right.
         if direction == 'right':
@@ -85,18 +108,29 @@ class Player(Item):
         return self.position
 
 
-class Collected(Item):
+class Item(ItemBase):
     """Class used to generate the objects that Mac Gyver has to collect.
-    It's an Item's child."""
+    It's an ItemBase's child.
+
+    """
 
     def __init__(self, image):
+        """Constructor.
+
+        :param image: file containing the image of the item.
+
+        """
+
         super().__init__(image)
         # Object position not yet defined.
         self.exists = 0
 
     def init_position(self, model):
         """Random initialization of the position of the objects.
-        :param : model: model of the maze."""
+
+        :param model: model of the maze.
+
+        """
 
         # While no valid position has been defined.
         while self.exists == 0:

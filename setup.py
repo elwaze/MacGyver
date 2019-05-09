@@ -13,7 +13,7 @@ includes = [
     "pygame", "os"
 ]
 
-include_files = "maze.txt", "images", "README.md", "font"
+include_files = ("resources", "README.md",)
 
 options = {
     'build_exe': {
