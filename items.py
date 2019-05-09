@@ -9,6 +9,7 @@ the items MacGyver has to collect. """
 
 import pygame
 import cons
+
 from random import randint
 
 
@@ -32,12 +33,14 @@ class Item(object):
 
     def show(self, window):
         """Method used to display the item
-        :param : window : window where the game is displayed. """
+        :param : window : window on which the game is displayed. """
+
         window.blit(self.image, self.position)
 
 
 class Player(Item):
-    """Class used to create Mac Gyver. """
+    """Class used to create Mac Gyver.
+    It's an Item's child."""
 
     def __init__(self, image):
         super().__init__(image)
@@ -83,7 +86,8 @@ class Player(Item):
 
 
 class Collected(Item):
-    """Class used to generate the objects that Mac Gyver has to collect."""
+    """Class used to generate the objects that Mac Gyver has to collect.
+    It's an Item's child."""
 
     def __init__(self, image):
         super().__init__(image)
@@ -91,7 +95,9 @@ class Collected(Item):
         self.exists = 0
 
     def init_position(self, model):
-        """Random initialization of the position of the objects."""
+        """Random initialization of the position of the objects.
+        :param : model: model of the maze."""
+
         # While no valid position has been defined.
         while self.exists == 0:
             # x = random integer in the length of the window.

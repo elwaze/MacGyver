@@ -9,7 +9,7 @@ import cons
 
 class Maze(object):
     """Class used to create the maze.
-    :param : file : file where is written the structure of the maze"""
+    :param: file : file where is written the structure of the maze"""
 
     def __init__(self, file):
         self.file = file
@@ -19,6 +19,7 @@ class Maze(object):
         """Method used to generate the maze from the txt file:
         A list is created,
         containing one list by line contained in the file."""
+
         # We open the file and create the list of lines.
         with open(self.file, "r") as file:
             lines_n = []
@@ -37,7 +38,8 @@ class Maze(object):
     def display(self, window):
         """Method used to display  the maze
         from the list we generated with the method initialize_maze.
-        :param : window : window where the maze is displayed"""
+        :param: window: window on which the maze is displayed."""
+
         # Images:
         # image of the arrival is image of the guard
         # standing on the arrival sprite.
@@ -76,8 +78,9 @@ class Maze(object):
 
     # display of the end of the game
     def text_display(self, window, text):
-        """method to display text in the window
-        :param: text: text to display"""
+        """method to display text in the window.
+        :param: window: window on which the text is displayed.
+        :param: text: text to display."""
 
         # Replacing the maze by a simple background.
         background = pygame.Surface((cons.WINDOW_SIZE, cons.WINDOW_SIZE))

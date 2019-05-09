@@ -9,21 +9,21 @@ with the cursor movement keys.
 Before trying to escape, he has to collect 3 objects on his way.
 
 Python script.
-files : main.py, play.py, maze.py, items.py, cons.py, maze.txt, images, font
+files : main.py, runner.py, maze.py, items.py, cons.py, maze.txt, images, font
 """
 
 
 # Modules importation.
 
-from run import Run
+from runner import Runner
 
 
 def main():
-    """Main function calling Run to run the game."""
+    """Main function calling Runner to run the game."""
 
-    init = Run()
+    runner = Runner()
 
-    return Run.run(init)
+    return Runner.runner(runner)
 
 
 if __name__ == '__main__':

@@ -6,7 +6,7 @@ The aim of this project was to create a game where the player has to move Mac Gi
 Before trying to escape, he has to collect 3 objects on his way.
 
 Python script.  
-files : main.py, items.py, maze.py, cons.py, maze.txt, images, font
+files : main.py, runner.py, items.py, maze.py, cons.py, maze.txt, images, font
 
 ## How to play :
 
