@@ -123,16 +123,10 @@ class Runner(object):
 
         # We check if there are still objects to pick in the maze
         if self.syringe.exists == 0:
-            self.maze.text_display(self.window,
-                                   "You've not assembled the syringe\n"
-                                   "to asleep the guard,\n"
-                                   " you're dead !!!")
+            self.maze.text_display(self.window, cons.LOSTXT)
         # If not, the player has won.
         else:
-            self.maze.text_display(self.window, "Well done !\n"
-                                                "With the 3 objects that you have\n"
-                                                " assembled, you asleep the guard and\n"
-                                                " you escape yourself !")
+            self.maze.text_display(self.window, cons.WINTXT)
         # We go out of the While loop.
         return 0
 

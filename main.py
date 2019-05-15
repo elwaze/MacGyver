@@ -9,7 +9,8 @@ with the cursor movement keys.
 Before trying to escape, he has to collect 3 objects on his way.
 
 Python script.
-files: main.py, runner.py, maze.py, items.py, cons.py, resources (maze.txt, images, font)
+files: main.py, runner.py, maze.py, items.py, cons.py,
+resources (maze.txt, images, font)
 
 """
 
