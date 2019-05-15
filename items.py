@@ -1,7 +1,8 @@
 #! /usr/bin env python3
 # coding: utf-8
 
-"""File containing the superclass ItemBase,
+"""
+File containing the superclass ItemBase,
 and its subclasses Player and Item.
 Player is used to create MacGyver.
 Item is used to generate
@@ -59,6 +60,7 @@ class Player(ItemBase):
 
     def __init__(self, image):
         """Constructor.
+
         :param image: file containing the image of the player.
 
         """

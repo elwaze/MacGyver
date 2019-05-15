@@ -2,9 +2,7 @@
 # coding: utf-8
 
 
-"""
-MacGyver.py constants.
-"""
+"""MacGyver.py constants."""
 
 # Window parameters.
 SIZE_IN_SPRITES = 15

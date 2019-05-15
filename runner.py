@@ -1,9 +1,12 @@
 #! /usr/bin env python3
 # coding: utf-8
 
-"""File containing the class Runner.
+"""
+File containing the class Runner.
 Used to initialise the elements of the maze and
-run the loop playing the game."""
+run the loop playing the game.
+
+"""
 
 import cons
 import pygame.locals
@@ -121,17 +124,15 @@ class Runner(object):
         # We check if there are still objects to pick in the maze
         if self.syringe.exists == 0:
             self.maze.text_display(self.window,
-                                   "Vous vous êtes présenté devant \n"
-                                   "le garde sans les armes \n"
-                                   "nécessaires... \n"
-                                   "vous avez perdu !")
+                                   "You've not assembled the syringe\n"
+                                   "to asleep the guard,\n"
+                                   " you're dead !!!")
         # If not, the player has won.
         else:
-            self.maze.text_display(self.window, "Bravo ! \n"
-                                                "À l'aide de la seringue \n"
-                                                "que vous avez fabriquée, \n"
-                                                "vous avez vaincu le garde, \n"
-                                                "vous vous échappez !")
+            self.maze.text_display(self.window, "Well done !\n"
+                                                "With the 3 objects that you have\n"
+                                                " assembled, you asleep the guard and\n"
+                                                " you escape yourself !")
         # We go out of the While loop.
         return 0
 
